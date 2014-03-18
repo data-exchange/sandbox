@@ -168,7 +168,6 @@ class XTomoReader:
         out : ndarray
             Output 2-D matrix as numpy array.
         """
-        print self.file_name
         im = Image.open(self.file_name)
         out = np.fromstring(im.tostring(), dtype).reshape(
                                tuple(list(im.size[::-1])))
@@ -179,7 +178,7 @@ class XTomoReader:
         if y_end is None:
             y_end = num_y
             
-        im.close()
+        #im.close()
         return out[x_start:x_end:x_step,
                    y_start:y_end:y_step]
         
@@ -225,7 +224,7 @@ class XTomoReader:
         if y_end is None:
             y_end = num_y
         
-        im.close()
+        #im.close()
         return out[x_start:x_end:x_step,
                    y_start:y_end:y_step]
         

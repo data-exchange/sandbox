@@ -389,13 +389,7 @@ class Import():
 
 
                 elif (data_type is 'tiff'):
-                    print "#############################"
-                    print _file_name
-                    print x_start
-                    print slice_start
-                    
-                    tmpdata = f.tiff(_file_name,
-                                     x_start = slices_start,
+                    tmpdata = f.tiff(x_start = slices_start,
                                      x_end = slices_end,
                                      x_step = slices_step,
                                      dtype = dtype)
@@ -404,7 +398,6 @@ class Import():
                     (data_type is 'compressed_tiff') or
                     (data_type is 'hdf4')):
                     if m == 0: # Get resolution once.
-                        print "#############################"
                         input_data = np.empty((len(ind),
                                              tmpdata.shape[0],
                                              tmpdata.shape[1]),
@@ -450,8 +443,7 @@ class Import():
                                      array_name='data')
 
                 elif (data_type is 'compressed_tiff'):
-                    tmpdata = f.tiffc(_file_name,
-                                      x_start=slices_start,
+                    tmpdata = f.tiffc(x_start=slices_start,
                                       x_end=slices_end,
                                       x_step=slices_step,
                                       dtype=dtype)
@@ -463,8 +455,7 @@ class Import():
                     tmpdata = f.netcdf(_file_name)
 
                 elif (data_type is 'tiff'):
-                    tmpdata = f.tiff(_file_name,
-                                     x_start=slices_start,
+                    tmpdata = f.tiff(x_start=slices_start,
                                      x_end=slices_end,
                                      x_step=slices_step,
                                      dtype=dtype)
