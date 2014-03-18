@@ -5,12 +5,11 @@ import numpy as np
 import PIL.Image as Image
 import netCDF4 as nc
 
-#from formats.elettra.tifffile import TiffFile
+from formats.elettra.tifffile import TiffFile
 import formats.xradia.xradia_xrm as xradia
 import formats.xradia.data_struct as dstruct
 import formats.aps_13bm.data_spe as spe
 from formats.esrf.EdfFile import EdfFile
-
 
 class XTomoReader:
     def __init__(self, file_name):
@@ -136,13 +135,14 @@ class XTomoReader:
         
         
     def tiff(self, 
-             dtype='uint16',
              x_start=0,
              x_end=None,
              x_step=1,
              y_start=0,
              y_end=None,
-             y_step=1):
+             y_step=1,
+             dtype='uint16'
+             ):
              
         """
         Read TIFF files.
@@ -168,6 +168,7 @@ class XTomoReader:
         out : ndarray
             Output 2-D matrix as numpy array.
         """
+        print self.file_name
         im = Image.open(self.file_name)
         out = np.fromstring(im.tostring(), dtype).reshape(
                                tuple(list(im.size[::-1])))

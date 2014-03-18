@@ -3,7 +3,8 @@ import numpy as np
 import os
 import h5py
 import logging
-from syncpy.dataexchange.xtomo.xtomo_reader import XTomoReader
+
+from xtomo.xtomo_reader import XTomoReader
 
 
 class Import():
@@ -323,10 +324,11 @@ class Import():
                     tmpdata = f.netcdf()
 
                 elif (data_type is 'tiff'):
+                    #print dtype
                     tmpdata = f.tiff(x_start=slices_start,
                                      x_end=slices_end,
                                      x_step=slices_step,
-                                     dtype=dtype)
+                                     dtype='uint16')
 
                 if ((data_type is 'tiff') or 
                     (data_type is 'compressed_tiff') or 
@@ -387,20 +389,27 @@ class Import():
 
 
                 elif (data_type is 'tiff'):
+                    print "#############################"
+                    print _file_name
+                    print x_start
+                    print slice_start
+                    
                     tmpdata = f.tiff(_file_name,
-                                     x_start=slices_start,
-                                     x_end=slices_end,
-                                     x_step=slices_step,
-                                     dtype=dtype)
-
+                                     x_start = slices_start,
+                                     x_end = slices_end,
+                                     x_step = slices_step,
+                                     dtype = dtype)
+                    
                 if ((data_type is 'tiff') or 
                     (data_type is 'compressed_tiff') or
                     (data_type is 'hdf4')):
                     if m == 0: # Get resolution once.
+                        print "#############################"
                         input_data = np.empty((len(ind),
                                              tmpdata.shape[0],
                                              tmpdata.shape[1]),
                                              dtype=dtype)
+                        #print dtype
                     input_data[m, :, :] = tmpdata
 
                 if ((data_type is 'spe') or 
