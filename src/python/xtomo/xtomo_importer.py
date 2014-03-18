@@ -134,8 +134,8 @@ class Import():
                          projections_angle_range=180,
                          projections_zeros=True,
                          projections_digits=4,
-                         white_digits=4,
-                         dark_digits=4,
+                         white_digits=None,
+                         dark_digits=None,
                          white_zeros=True,
                          dark_zeros=True,
                          dtype='uint16',
@@ -252,7 +252,7 @@ class Import():
                 dark_file_name.endswith('nc'):
                 data_file_dark = dark_file_name.split('.')[-2]
 
-        elif (data_type is 'tiff'):
+        elif ((data_type is 'tiff') or (data_type is 'compressed_tiff')):
             if file_name.endswith('tif') or \
                 file_name.endswith('tiff'):
                 data_file = file_name.split('.')[-2]
@@ -324,7 +324,6 @@ class Import():
                     tmpdata = f.netcdf()
 
                 elif (data_type is 'tiff'):
-                    #print dtype
                     tmpdata = f.tiff(x_start=slices_start,
                                      x_end=slices_end,
                                      x_step=slices_step,
@@ -368,25 +367,22 @@ class Import():
 
                 f = XTomoReader(_file_name)
                 if (data_type is 'hdf4'):
-                    tmpdata = f.hdf4(_file_name,
-                                     x_start=slices_start,
+                    tmpdata = f.hdf4(x_start=slices_start,
                                      x_end=slices_end,
                                      x_step=slices_step,
                                      array_name='data')
                                         
                 elif (data_type is 'compressed_tiff'):
-                    tmpdata = f.tiffc(_file_name,
-                                      x_start=slices_start,
+                    tmpdata = f.tiffc(x_start=slices_start,
                                       x_end=slices_end,
                                       x_step=slices_step,
                                       dtype=dtype)
 
                 elif (data_type is 'spe'):
-                    tmpdata = f.spe(_file_name)
+                    tmpdata = f.spe()
 
                 elif (data_type is 'nc'):
-                    tmpdata = f.netcdf(_file_name)
-
+                    tmpdata = f.netcdf()
 
                 elif (data_type is 'tiff'):
                     tmpdata = f.tiff(x_start = slices_start,
@@ -436,8 +432,7 @@ class Import():
 
                 f = XTomoReader(_file_name)
                 if (data_type is 'hdf4'):
-                    tmpdata = f.hdf4(_file_name,
-                                     x_start=slices_start,
+                    tmpdata = f.hdf4(x_start=slices_start,
                                      x_end=slices_end,
                                      x_step=slices_step,
                                      array_name='data')
@@ -449,10 +444,10 @@ class Import():
                                       dtype=dtype)
 
                 elif (data_type is 'spe'):
-                    tmpdata = f.spe(_file_name)
+                    tmpdata = f.spe()
 
                 elif (data_type is 'nc'):
-                    tmpdata = f.netcdf(_file_name)
+                    tmpdata = f.netcdf()
 
                 elif (data_type is 'tiff'):
                     tmpdata = f.tiff(x_start=slices_start,
@@ -591,7 +586,7 @@ class Import():
         Setup and start command line logging.
         """
         # Top-level log setup.
-        xtomo.logger = logging.getLogger("tomopy") 
+        xtomo.logger = logging.getLogger("data exchange") 
         if xtomo._log_level == 'DEBUG':
             xtomo.logger.setLevel(logging.DEBUG)
         elif xtomo._log_level == 'INFO':

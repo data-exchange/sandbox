@@ -54,13 +54,13 @@ def main():
     file.close()
 
     dark_start = 0
-    dark_end = 5 # 20
+    dark_end = 20
     dark_step = 1
     white_start = 0
     white_end = int(Angles[0]) 
     white_step = int(WhiteStep[0])
     projections_start = 0
-    projections_end = 5 #int(Angles[0])
+    projections_end = int(Angles[0])
 
     mydata = dx.Import()
     # Create minimal hdf5 file

@@ -8,7 +8,7 @@
 
 
 """ 
-import data_exchange as dx
+import xtomo.xtomo_importer as dx
 
 def main():
 
@@ -22,10 +22,10 @@ def main():
     dark_start = 1504
     dark_end = 1505
 
-    mydata = dx.Convert()
+    mydata = dx.Import()
     # Create minimal hdf5 file
     mydata.series_of_images(file_name,
-                            hdf5_file_name = hdf5_file_name,
+                            #hdf5_file_name = hdf5_file_name,
                             projections_start = projections_start,
                             projections_end = projections_end,
                             white_start = white_start,
@@ -34,7 +34,7 @@ def main():
                             dark_end = dark_end,
                             projections_digits = 5,
                             data_type = 'hdf4',
-                            log='WARNING'
+                            log='INFO'
                             )
 if __name__ == "__main__":
     main()
