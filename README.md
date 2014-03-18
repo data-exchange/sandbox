@@ -27,7 +27,7 @@ To test if the installation was succesfull, open a new shell and try:
 
 ## Using Data Exchange:
 
-- In [`data-exchange/src/python/examples`](https://github.com/data-exchange/data-exchange/tree/master/src/python/examples) there are readers to handle tomographic datasets collected at all major synchrotron facilities.
+- In [`data-exchange/src/python/examples`](https://github.com/data-exchange/data-exchange/tree/master/src/python/xtomo/converters) there are readers to handle tomographic datasets collected at all major synchrotron facilities.
 
 
 
